@@ -3,10 +3,32 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
        					   http://www.springframework.org/schema/beans/spring-beans.xsd">
-    <!-- 配置service
-        <bean> 配置需要创建的对象
-            id ：用于之后从spring容器获得实例时使用的
-            class ：需要创建实例的全限定类名
+
+    <!--单例-->
+    <!--<bean id="userServiceId" class="dao.UserServiceImpl"></bean>-->
+    <!--多例-->
+    <bean id="userServiceId" class="dao.UserServiceImpl" scope="prototype"></bean>
+
+    <!--Di-->
+    <bean id="bookServiceId" class="dao.BookServiceImpl">
+        <property name="bookDao" ref="bookDaoId"></property>
+    </bean>
+    <bean id="bookDaoId" class="dao.BookDaoImpl"></bean>
+
+
+    <!-- 创建工厂实例 -->
+    <bean id="myBeanFactoryId" class="dao.MyBeanFactory"></bean>
+    <!-- 获得userService
+        * factory-bean 确定工厂实例
+        * factory-method 确定普通方法
     -->
-    <bean id="userServiceId" class="UserServiceImpl"></bean>
+    <bean id="userServiceFactoryId" factory-bean="myBeanFactoryId" factory-method="createService"></bean>
+
+
+    <!-- 将静态工厂创建的实例交予spring
+          class 确定静态工厂全限定类名
+          factory-method 确定静态方法名
+      -->
+    <bean id="userServiceStaticeFactoryId" class="dao.MyBeanFactory" factory-method="staticCreateService"></bean>
+
 </beans>
