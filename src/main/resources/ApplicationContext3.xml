@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       					   http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--
+       集合的注入都是给<property>添加子标签
+           数组：<array>
+           List：<list>
+           Set：<set>
+           Map：<map> ，map存放k/v 键值对，使用<entry>描述
+           Properties：<props>  <prop key=""></prop>  【】
+
+       普通数据：<value>
+       引用数据：<ref>
+   -->
+    <bean id="collDataId" class="dao.CollData" >
+        <property name="arrayData">
+            <array>
+                <value>A</value>
+                <value>R</value>
+                <value>R</value>
+                <value>AY</value>
+            </array>
+        </property>
+
+        <property name="listData">
+            <list>
+                <value>L</value>
+                <value>I</value>
+                <value>S</value>
+                <value>T</value>
+            </list>
+        </property>
+
+        <property name="setData">
+            <set>
+                <value>S</value>
+                <value>E</value>
+                <value>T</value>
+            </set>
+        </property>
+
+        <property name="mapData">
+            <map>
+                <entry key="jack" value="杰克"></entry>
+                <entry>
+                    <key><value>jarvis</value></key>
+                    <value>贾维斯</value>
+                </entry>
+            </map>
+        </property>
+
+        <property name="propsData">
+            <props>
+                <prop key="apple">苹果</prop>
+                <prop key="banana">香蕉</prop>
+                <prop key="orange">橘子</prop>
+            </props>
+        </property>
+    </bean>
+
+</beans>

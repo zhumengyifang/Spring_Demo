@@ -1,7 +1,4 @@
-import dao.BookService;
-import dao.Person;
-import dao.User;
-import dao.UserService;
+import dao.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -113,5 +110,14 @@ public class FirstExecute {
         System.out.println(person.toString());
     }
 
+    /**
+     * 集合注入
+     */
+    @Test
+    public void demo9() {
+        ApplicationContext applicationContext = getApplicationContext("ApplicationContext3.xml");
+        CollData collData = applicationContext.getBean("collDataId", CollData.class);
+        System.out.println(collData.toString());
+    }
 
 }
