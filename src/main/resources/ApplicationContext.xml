@@ -31,4 +31,13 @@
       -->
     <bean id="userServiceStaticeFactoryId" class="dao.MyBeanFactory" factory-method="staticCreateService"></bean>
 
+
+    <!--
+            init-method 用于配置初始化方法,准备数据等
+            destroy-method 用于配置销毁方法,清理资源等
+    -->
+    <bean id="userServiceDestroyId" class="dao.UserServiceImpl"
+          init-method="myInit" destroy-method="myDestroy"></bean>
+
+
 </beans>

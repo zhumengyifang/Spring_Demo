@@ -37,11 +37,11 @@ public class FirstExecute {
      * 工厂
      */
     @Test
-    public void demo03(){
+    public void demo3() {
         //从spring容器获得
         //1 获得容器
         ApplicationContext applicationContext = getApplicationContext();
-        UserService userService = applicationContext.getBean("userServiceFactoryId" ,UserService.class);
+        UserService userService = applicationContext.getBean("userServiceFactoryId", UserService.class);
         System.out.println("普通工厂");
         userService.addUser();
     }
@@ -50,13 +50,26 @@ public class FirstExecute {
      * 静态工厂
      */
     @Test
-    public void demo04(){
+    public void demo4() {
         //从spring容器获得
         //1 获得容器
         ApplicationContext applicationContext = getApplicationContext();
-        UserService userService = applicationContext.getBean("userServiceStaticeFactoryId" ,UserService.class);
+        UserService userService = applicationContext.getBean("userServiceStaticeFactoryId", UserService.class);
         System.out.println("静态工厂");
         userService.addUser();
+    }
+
+    @Test
+    public void demo5() {
+        String smlPath = "ApplicationContext.xml";
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = new ClassPathXmlApplicationContext(smlPath);
+        UserService userService = (UserService) classPathXmlApplicationContext.getBean("userServiceDestroyId");
+        userService.addUser();
+        //要求：1.容器必须close，销毁方法执行;
+        //     2.必须是单例的
+        //classPathXmlApplicationContext.getClass().getMethod("close").invoke(classPathXmlApplicationContext);
+        // * 此方法接口中没有定义，实现类提供
+        classPathXmlApplicationContext.close();
     }
 
 
