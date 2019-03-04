@@ -2,6 +2,8 @@ import dao.*;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import test.StudentAction;
+import test.UserServiceTest;
 
 import java.lang.reflect.InvocationTargetException;
 
@@ -119,41 +121,40 @@ public class FirstExecute {
         CollData collData = applicationContext.getBean("collDataId", CollData.class);
         System.out.println(collData.toString());
     }
-	
-	//下面的未测试
-	
-	 /**
-     *使用注解代替xml控制反转
-	 *初始化：@PostConstruct
-     *销毁：@PreDestroy
-     *多例:@Scope(“prototype”)
+
+    //下面的未测试
+
+    /**
+     * 使用注解代替xml控制反转
+     * 初始化：@PostConstruct
+     * 销毁：@PreDestroy
+     * 多例:@Scope(“prototype”)
      */
-	@Test
+    @Test
     public void demo10() {
         ApplicationContext applicationContext = getApplicationContext("ApplicationContext4.xml");
         UserServiceTest userServiceTest = applicationContext.getBean("app4UserServiceId", UserServiceTest.class);
         userServiceTest.addUser();
-    }	
-	
-	 /**
-     *使用注解代替xml依赖注入(字符串注入)
-     */
-	@Test
-    public void demo11() {
-        ApplicationContext applicationContext = getApplicationContext("ApplicationContext4.xml");
-		User user =  applicationContext.getBean("user",User.class);
-        System.out.println("studentAction = " + studentAction);
     }
 
-	 /**
-     *使用注解代替xml依赖注入(对象注入)
+    /**
+     * 使用注解代替xml依赖注入(字符串注入)
      */
-	@Test
+    @Test
+    public void demo11() {
+        ApplicationContext applicationContext = getApplicationContext("ApplicationContext4.xml");
+        test.User user = applicationContext.getBean("testuserId", test.User.class);
+        System.out.println(user.toString());
+    }
+
+    /**
+     * 使用注解代替xml依赖注入(对象注入)
+     */
+    @Test
     public void demo12() {
         ApplicationContext applicationContext = getApplicationContext("ApplicationContext4.xml");
-		StudentAction studentAction = applicationContext.getBean("studentActionId",StudentAction.class);
+        StudentAction studentAction = applicationContext.getBean("studentActionId", StudentAction.class);
         studentAction.execute();
     }
-	
-	
+
 }
