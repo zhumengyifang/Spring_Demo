@@ -132,9 +132,11 @@ public class FirstExecute {
      */
     @Test
     public void demo10() {
-        ApplicationContext applicationContext = getApplicationContext("ApplicationContext4.xml");
-        UserServiceTest userServiceTest = applicationContext.getBean("app4UserServiceId", UserServiceTest.class);
+        ClassPathXmlApplicationContext classPathXmlApplicationContext = (ClassPathXmlApplicationContext)getApplicationContext("ApplicationContext4.xml");
+        UserServiceTest userServiceTest = classPathXmlApplicationContext.getBean("app4UserServiceId", UserServiceTest.class);
         userServiceTest.addUser();
+
+        classPathXmlApplicationContext.close();
     }
 
     /**
@@ -156,5 +158,7 @@ public class FirstExecute {
         StudentAction studentAction = applicationContext.getBean("studentActionId", StudentAction.class);
         studentAction.execute();
     }
+
+
 
 }
