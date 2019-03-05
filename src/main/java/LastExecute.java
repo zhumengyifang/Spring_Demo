@@ -2,6 +2,7 @@ import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import test2.UserService;
+import test3.AccountService;
 
 public class LastExecute {
     public ApplicationContext getApplicationContext(String smlPath) {
@@ -33,5 +34,24 @@ public class LastExecute {
         userService.addUser();
         userService.updateUser();
         userService.deleteUser();
+    }
+
+    /**
+     * 事物处理
+     */
+    @Test
+    public void demo03(){
+        String xmlPath = "ApplicationContext7.xml";
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
+        AccountService accountService =  (AccountService) applicationContext.getBean("accountService");
+        accountService.transfer("jack", "rose", 1000);
+    }
+
+    @Test
+    public void demo04(){
+        String xmlPath = "ApplicationContext8.xml";
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext(xmlPath);
+        AccountService accountService =  (AccountService) applicationContext.getBean("accountService");
+        accountService.transfer("jack", "rose", 1000);
     }
 }
